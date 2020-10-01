@@ -1,14 +1,11 @@
 package com.unclepaul.uicacheprototype.materilizedview;
 
-import com.google.gson.reflect.TypeToken;
-import com.unclepaul.uicacheprototype.main;
 import com.unclepaul.uicacheprototype.utils.ManualResetEvent;
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.producer.ProducerConfig;
-import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.serialization.LongDeserializer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import com.google.gson.Gson;
@@ -17,8 +14,6 @@ import org.slf4j.Logger;
 
 import java.time.Duration;
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import static org.slf4j.LoggerFactory.getLogger;
 

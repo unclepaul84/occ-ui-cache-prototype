@@ -12,23 +12,22 @@ import org.slf4j.Logger;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import static org.slf4j.LoggerFactory.*;
 
+@SpringBootApplication
+public class ConsoleApplication  implements ApplicationRunner {
+    protected static final Logger log = getLogger(ConsoleApplication.class);
 
-public class main {
-    protected static final Logger log = getLogger(main.class);
 
-    public static void main(String[] str) throws Exception {
+    public static void main(String[] args) throws Exception {
+        SpringApplication app = new SpringApplication(ConsoleApplication.class);
+        app.setBannerMode(Banner.Mode.OFF);
+        app.run(args);
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
-        //populateKafkaTopics();
-
-        test_StockLoanMaterializedView();
-
-        test_Price_MaterializedView();
-
-        String name = reader.readLine();
     }
 
     private static void test_StockLoanMaterializedView() throws Exception {
@@ -114,4 +113,16 @@ public class main {
         System.out.println("Fully Started! " +  (System.currentTimeMillis() - startTime) + " milliseconds");
     }
 
+    @Override
+    public void run(ApplicationArguments args) throws Exception {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        //populateKafkaTopics();
+
+        test_StockLoanMaterializedView();
+
+        test_Price_MaterializedView();
+
+        String name = reader.readLine();
+    }
 }
