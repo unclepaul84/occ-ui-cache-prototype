@@ -6,22 +6,23 @@ import com.unclepaul.uicacheprototype.datagenerators.KafkaStockLoanDataGenerator
 import com.unclepaul.uicacheprototype.entities.EquityPriceDTO;
 import com.unclepaul.uicacheprototype.materilizedview.EquityPriceDTOKafkaMaterializedView;
 import com.unclepaul.uicacheprototype.materilizedview.StockLoanDTOKafkaMaterializedView;
+import com.unclepaul.uicacheprototype.springcomponents.StockLoanService;
 import com.unclepaul.uicacheprototype.utils.OperationTimer;
 import org.slf4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.stereotype.Component;
 
 import static org.slf4j.LoggerFactory.*;
 
 @SpringBootApplication
 public class ConsoleApplication  implements ApplicationRunner {
     protected static final Logger log = getLogger(ConsoleApplication.class);
-
+    private final StockLoanService _sl;
 
     public static void main(String[] args) throws Exception {
         SpringApplication app = new SpringApplication(ConsoleApplication.class);
@@ -29,9 +30,25 @@ public class ConsoleApplication  implements ApplicationRunner {
         app.run(args);
 
     }
+    public ConsoleApplication (StockLoanService sl)
+    {
+        _sl = sl;
+    }
+    @Override
+    public void run(ApplicationArguments args) throws Exception {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        //populateKafkaTopics();
+
+       // test_StockLoanMaterializedView();
+
+       // test_Price_MaterializedView();
+
+        String name = reader.readLine();
+    }
 
     private static void test_StockLoanMaterializedView() throws Exception {
-        StockLoanDTOKafkaMaterializedView slMv = new StockLoanDTOKafkaMaterializedView("current-stock-loans", 199999L);
+        StockLoanDTOKafkaMaterializedView slMv = new StockLoanDTOKafkaMaterializedView(Topics.StockLoans, 199999L);
 
         try(var t = new OperationTimer("StockLoanDTOKafkaMaterializedView startup time")) {
 
@@ -56,9 +73,8 @@ public class ConsoleApplication  implements ApplicationRunner {
             log.info("StockLoans for AAPL count: " + Long.toString(count));
         }
     }
-
     private static void test_Price_MaterializedView() throws Exception {
-        EquityPriceDTOKafkaMaterializedView view = new EquityPriceDTOKafkaMaterializedView("current-prices", 10003L);
+        EquityPriceDTOKafkaMaterializedView view = new EquityPriceDTOKafkaMaterializedView(Topics.Prices, 10003L);
 
         try(var t = new OperationTimer("EquityPriceDTOKafkaMaterializedView startup time")) {
 
@@ -92,37 +108,27 @@ public class ConsoleApplication  implements ApplicationRunner {
             log.warn( Double.toString(priceRes.get().Price));
         }
     }
-
     private static void populateKafkaTopics() throws Exception {
         long startTime = System.currentTimeMillis();
 
-        KafkaPriceDataGenerator priceGen = new KafkaPriceDataGenerator("current-prices",1000, 10000, 1000);
+        KafkaPriceDataGenerator priceGen = new KafkaPriceDataGenerator(Topics.Prices,1000, 10000, 1000);
 
         priceGen.start(true);
+
         System.out.println("Prices Started!");
-        KafkaStockLoanDataGenerator stockLoanGen = new KafkaStockLoanDataGenerator("current-stock-loans",priceGen.getEntities(),2000000);
+
+        KafkaStockLoanDataGenerator stockLoanGen = new KafkaStockLoanDataGenerator(Topics.StockLoans,priceGen.getEntities(),2000000);
 
         stockLoanGen.start(true);
 
         System.out.println("StockLoan Started!");
 
-        KafkaStockColleteralViewDataGenerator collateralGen = new KafkaStockColleteralViewDataGenerator("current-collateral-views", stockLoanGen.getEntities());
+        KafkaStockColleteralViewDataGenerator collateralGen = new KafkaStockColleteralViewDataGenerator(Topics.CollateralViews, stockLoanGen.getEntities());
 
         collateralGen.start(true);
 
         System.out.println("Fully Started! " +  (System.currentTimeMillis() - startTime) + " milliseconds");
     }
 
-    @Override
-    public void run(ApplicationArguments args) throws Exception {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        //populateKafkaTopics();
-
-        test_StockLoanMaterializedView();
-
-        test_Price_MaterializedView();
-
-        String name = reader.readLine();
-    }
 }

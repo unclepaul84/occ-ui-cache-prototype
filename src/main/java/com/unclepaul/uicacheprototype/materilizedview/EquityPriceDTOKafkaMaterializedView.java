@@ -16,7 +16,7 @@ public class EquityPriceDTOKafkaMaterializedView extends KafkaMaterializedViewBa
     }
 
     @Override
-    void SetupIndexes() {
+    protected void SetupIndexes() {
 
         this._materializedView.addIndex(HashIndex.onAttribute(EquityPriceDTO_Symbol));
     }

@@ -30,11 +30,6 @@ repositories {
 }
 
 dependencies {
-    compile ('org.springframework.boot:spring-boot-starter-actuator')
-            {
-                exclude module: "spring-boot-starter-logging"
-                exclude module: "logback-classic"
-            }
     compile ('org.springframework.boot:spring-boot-starter-web')
             {
                 exclude module: "spring-boot-starter-logging"

@@ -50,7 +50,7 @@ public class KafkaTopicEntityListener<T> {
 
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
 
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, "materialized-view");
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, "materialized-view-" + this._topic);
 
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, LongDeserializer.class.getName());
 

@@ -11,8 +11,10 @@ public abstract class KafkaMaterializedViewBase<T> {
     private final KafkaTopicEntityListener<T> _kafkaListener;
     private final Consumer<Iterable<T>> _consumer;
     protected final IndexedCollection<T> _materializedView = new ConcurrentIndexedCollection<T>();
+    private final Class<T> _tClass;
 
     KafkaMaterializedViewBase(String topic, Class<T> tClass, Long fullSnapshotEstimate) {
+        _tClass = tClass;
 
         _consumer = new Consumer<Iterable<T>>() {
             @Override
@@ -28,7 +30,10 @@ public abstract class KafkaMaterializedViewBase<T> {
     public IndexedCollection<T> getUnderlyingView() {
         return _materializedView;
     }
-    abstract void SetupIndexes();
+    protected void SetupIndexes()
+    {
+        CQEngineUtils.autoPopulateIndexes(this._materializedView, _tClass );
+    }
 
     protected  void onBatch(Iterable<T> batch){
         _materializedView.update(batch,batch);
