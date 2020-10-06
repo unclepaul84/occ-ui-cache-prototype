@@ -16,8 +16,7 @@ import static java.util.stream.Collectors.toList;
 public final class Utils {
 
 
-    public static String whereSql(Map<String, ColumnFilter> filterMap)
-    {
+    public static String whereSql(Map<String, ColumnFilter> filterMap) throws Exception {
         if(filterMap == null || filterMap.size()==0)
             return " ";
 
@@ -41,7 +40,12 @@ public final class Utils {
                 {
                     conditions.add(fi.getKey() + " LIKE '%" + textFilter.getFilter() + "%'");
                 }
-
+                else if (textFilter.getType().equals("equals"))
+                {
+                    conditions.add(fi.getKey() + " = '" + textFilter.getFilter() + "'");
+                }
+                else
+                    throw new Exception("Unsupported filter type: " + textFilter.getType());
             }
             else if(fi.getValue() instanceof NumberColumnFilter)
             {
@@ -63,6 +67,8 @@ public final class Utils {
                 {
                     conditions.add(fi.getKey() + " > " + numFilter.getFilter() );
                 }
+                else
+                    throw new Exception("Unsupported filter type: " + numFilter.getType());
             }
         }
 

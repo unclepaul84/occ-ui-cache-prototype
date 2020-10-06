@@ -35,7 +35,7 @@ let gridOptions = {
                 buttons: ['reset'],
                 debounceMs: 200,
                 suppressAndOrCondition: true,
-                filterOptions: ['startsWith','contains']
+                filterOptions: ['startsWith','contains','equals']
                 } }
   },
 
