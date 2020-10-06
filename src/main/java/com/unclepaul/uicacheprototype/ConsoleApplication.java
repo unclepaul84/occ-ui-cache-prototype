@@ -1,9 +1,11 @@
 package com.unclepaul.uicacheprototype;
 
+import com.googlecode.cqengine.resultset.ResultSet;
 import com.unclepaul.uicacheprototype.datagenerators.KafkaPriceDataGenerator;
 import com.unclepaul.uicacheprototype.datagenerators.KafkaStockColleteralViewDataGenerator;
 import com.unclepaul.uicacheprototype.datagenerators.KafkaStockLoanDataGenerator;
 import com.unclepaul.uicacheprototype.entities.EquityPriceDTO;
+import com.unclepaul.uicacheprototype.entities.StockLoanDTO;
 import com.unclepaul.uicacheprototype.materilizedview.EquityPriceDTOKafkaMaterializedView;
 import com.unclepaul.uicacheprototype.materilizedview.StockLoanDTOKafkaMaterializedView;
 import com.unclepaul.uicacheprototype.springcomponents.StockLoanService;
@@ -36,9 +38,10 @@ public class ConsoleApplication  implements ApplicationRunner {
     }
     @Override
     public void run(ApplicationArguments args) throws Exception {
+
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        //populateKafkaTopics();
+       // populateKafkaTopics();
 
        // test_StockLoanMaterializedView();
 
@@ -129,6 +132,4 @@ public class ConsoleApplication  implements ApplicationRunner {
 
         System.out.println("Fully Started! " +  (System.currentTimeMillis() - startTime) + " milliseconds");
     }
-
-
 }

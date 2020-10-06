@@ -17,12 +17,17 @@ public class StockLoanService {
     private final StockLoanDTOKafkaMaterializedView _slMv;
 
     public StockLoanService() throws Exception {
-        _slMv = new StockLoanDTOKafkaMaterializedView(Topics.StockLoans, 199999L);
+        _slMv = new StockLoanDTOKafkaMaterializedView(Topics.StockLoans, 1000L);
 
         try(var t = new OperationTimer("StockLoanDTOKafkaMaterializedView startup time")) {
 
             _slMv.start(true);
         }
         log.info("StockLoans Total Count: " + Long.toString(_slMv.getUnderlyingView().size()));
+    }
+
+    public StockLoanDTOKafkaMaterializedView GetView()
+    {
+        return  _slMv;
     }
 }

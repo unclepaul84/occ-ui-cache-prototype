@@ -21,7 +21,7 @@ public class KafkaTopicEntityListener<T> {
     protected static final Logger log = getLogger(KafkaTopicEntityListener.class);
 
     private final String _topic;
-    private final java.util.function.Consumer<Iterable<T>> _batchProcessor;
+    private final java.util.function.Consumer<Collection<T>> _batchProcessor;
     private final Class<T> _tClass;
     private final Long _fullSnapshotEstimate;
     private Consumer<Long, String> _consumer;
@@ -30,7 +30,7 @@ public class KafkaTopicEntityListener<T> {
     private final ManualResetEvent _snapshotReceived = new ManualResetEvent(false);
 
 
-    KafkaTopicEntityListener(String topic, java.util.function.Consumer<Iterable<T>> batchProcessor, Class<T> tClass, Long fullSnapshotEstimate) {
+    KafkaTopicEntityListener(String topic, java.util.function.Consumer<Collection<T>> batchProcessor, Class<T> tClass, Long fullSnapshotEstimate) {
 
         _topic = topic;
         _batchProcessor = batchProcessor;

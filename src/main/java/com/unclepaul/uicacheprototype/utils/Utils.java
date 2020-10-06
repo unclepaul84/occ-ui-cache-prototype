@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 public final class Utils {
 
@@ -18,6 +19,9 @@ public final class Utils {
                 .distinct()
                 .limit(n)
                 .mapToObj(list::get);
+    }
+    public static <O> Stream<O> streamOf(Iterable<O> iterable) {
+        return StreamSupport.stream(iterable.spliterator(), false);
     }
 
 }

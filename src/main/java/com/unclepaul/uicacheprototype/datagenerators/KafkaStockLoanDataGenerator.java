@@ -60,7 +60,7 @@ public class KafkaStockLoanDataGenerator  extends KafkaEntityDataGeneratorBase<S
 
     private String pickRandomMember()
     {
-       return members[ this._rand.nextInt(members.length-1)];
+       return members[ this._rand.nextInt(members.length-1)].trim();
     }
 
 

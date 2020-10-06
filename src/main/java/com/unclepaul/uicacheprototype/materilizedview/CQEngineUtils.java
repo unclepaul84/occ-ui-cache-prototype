@@ -37,11 +37,11 @@ public class CQEngineUtils {
     public static <O> Iterable<Attribute<O, Comparable>> generateAttributesListForPojo(Class<O> pojoClass) {
        List<Attribute<O, Comparable>> generatedAttributes = new ArrayList<Attribute<O, Comparable>>();
         for (Field field : pojoClass.getDeclaredFields()) {
-            if (Comparable.class.isAssignableFrom(field.getType())) {
+           // if (Comparable.class.isAssignableFrom(field.getType())) {
                 @SuppressWarnings({"unchecked"})
                 Class<Comparable> fieldType = (Class<Comparable>) field.getType();
                 generatedAttributes.add(ReflectiveAttribute.forField(pojoClass, fieldType, field.getName()));
-            }
+            //}
         }
         return generatedAttributes;
     }

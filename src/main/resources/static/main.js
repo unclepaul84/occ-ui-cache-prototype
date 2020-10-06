@@ -1,9 +1,10 @@
 var columnDefs = [
 
-        { headerName: 'StockLoanId', field: 'StockLoanId' },
-        { headerName: 'StockSymbol', field: 'StockSymbol' },
-        { headerName: 'Lender', field: 'Borrower' },
-        { headerName: 'LoanQty', field: 'LoanQty' }
+        { headerName: 'StockLoanId', field: 'StockLoanId', type: 'number' },
+        { headerName: 'StockSymbol', field: 'StockSymbol' ,   type: 'text' },
+        { headerName: 'Borrower', field: 'Borrower',   type: 'text'  } ,
+        { headerName: 'Lender', field: 'Lender',  type: 'text'  },
+        { headerName: 'LoanQty', field: 'LoanQty' ,type: 'number' }
 ];
 
 let gridOptions = {
@@ -14,14 +15,41 @@ let gridOptions = {
     }
   },
 
-  enableSorting: true,
-  enableFilter: true,
+
   columnDefs: columnDefs,
-  enableColResize: true,
-  rowModelType: 'enterprise',
+
+  defaultColDef: {
+      flex: 1,
+      minWidth: 150,
+      sortable: true,
+      resizable: true,
+    },
+ columnTypes: {
+    number: { filter: 'agNumberColumnFilter', filterParams: {
+        buttons: ['reset'],
+        debounceMs: 1000,
+        suppressAndOrCondition: true,
+        filterOptions: ['equals','notEqual','lessThan', 'greaterThan']
+        } },
+    text: { filter: 'agTextColumnFilter', filterParams: {
+                buttons: ['reset'],
+                debounceMs: 200,
+                suppressAndOrCondition: true,
+                filterOptions: ['startsWith','contains']
+                } }
+  },
+
+
+
+  rowModelType: 'serverSide',
   cacheBlockSize: 1000,
   suppressAggFuncInHeader: true,
-  animateRows: false
+  suppressMultiSort: true,
+  animateRows: false,
+  paginationAutoPageSize: false,
+  paginationPageSize: 1000,
+  pagination: true,
+
 };
 
 function EnterpriseDatasource() {}
@@ -46,7 +74,7 @@ EnterpriseDatasource.prototype.getRows = function (params) {
 document.addEventListener('DOMContentLoaded', function () {
   let gridDiv = document.querySelector('#myGrid');
   new agGrid.Grid(gridDiv, gridOptions);
-  gridOptions.api.setEnterpriseDatasource(new EnterpriseDatasource());
+  gridOptions.api.setServerSideDatasource(new EnterpriseDatasource());
 });
 
 function numberCellFormatter(params) {
