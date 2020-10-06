@@ -8,4 +8,4 @@ $KAFKA/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic c
 $KAFKA/bin/kafka-topics.sh --bootstrap-server localhost:9092 --delete --topic current-stock-loans
 
 http://localhost:8080/?/download?query=SELECT%20*%20FROM%20t%20ORDER%20BY%20LoanQty%20DESC
-curl --header "Content-Type: application/json" --request POST --data '{"queryText":"SELECT * FROM t WHERE LoanQty > 10000 ORDER BY LoanQty DESC","limit":5}' http://localhost:8080/customQuery
+curl --header "Content-Type: application/json" --request POST --data '{"queryText":"SELECT * FROM t WHERE LoanQty > 10000 ORDER BY LoanQty DESC","limit":5}' http://localhost:8080/customQuery | python -m json.tool
