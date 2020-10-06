@@ -4,6 +4,7 @@ import com.unclepaul.uicacheprototype.entities.EquityPriceDTO;
 import com.unclepaul.uicacheprototype.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class KafkaPriceDataGenerator  extends KafkaEntityDataGeneratorBase<EquityPriceDTO> {
@@ -28,7 +29,7 @@ public class KafkaPriceDataGenerator  extends KafkaEntityDataGeneratorBase<Equit
             var dto = new EquityPriceDTO();
 
             dto.EquityId=i;
-            dto.Symbol = getRandoomStock() + Integer.toString(i);
+            dto.Symbol = getRandomStock() + Integer.toString(i);
             dto.Price = 100.0 * this._rand.nextDouble();
 
             res.add(dto);
@@ -47,18 +48,31 @@ public class KafkaPriceDataGenerator  extends KafkaEntityDataGeneratorBase<Equit
         return res.stream();
     }
 
-    private String getRandoomStock()
+    private String getRandomStock()
     {
         return stocks[_rand.nextInt(stocks.length-1)];
     }
 
     @Override
     Stream<EquityPriceDTO> chooseEntitiesForPublication() {
-        return Utils.pickRandom(this._entities, this._countPerUpdatePriceRecords).map((e)-> {
+
+        var coreStockCount = this._entities.size() - stocks.length;
+
+        List<EquityPriceDTO> coreStk = new ArrayList<>();
+
+        for (var i = coreStockCount; i<this._entities.size();i++)
+        {
+            var e = this._entities.get(i);
+
+            e.Price= 100.0*this._rand.nextDouble();
+
+            coreStk.add(e);
+        }
+
+        return Stream.concat(Utils.pickRandom(this._entities, this._countPerUpdatePriceRecords).map((e)-> {
             e.Price= 100.0*this._rand.nextDouble();
             return e;
-        });
-
+        }), coreStk.stream());
     }
 
     @Override

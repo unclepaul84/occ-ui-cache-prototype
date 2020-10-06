@@ -1,4 +1,4 @@
-package com.unclepaul.uicacheprototype.materilizedview;
+package com.unclepaul.uicacheprototype.materializedview;
 
 import com.googlecode.cqengine.attribute.Attribute;
 import com.googlecode.cqengine.attribute.SimpleAttribute;

@@ -1,4 +1,4 @@
-package com.unclepaul.uicacheprototype.materilizedview;
+package com.unclepaul.uicacheprototype.materializedview;
 
 import com.googlecode.cqengine.ConcurrentIndexedCollection;
 import com.googlecode.cqengine.IndexedCollection;

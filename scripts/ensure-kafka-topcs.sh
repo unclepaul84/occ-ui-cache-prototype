@@ -9,3 +9,7 @@ $KAFKA/bin/kafka-topics.sh --bootstrap-server localhost:9092 --delete --topic cu
 
 http://localhost:8080/?/download?query=SELECT%20*%20FROM%20t%20ORDER%20BY%20LoanQty%20DESC
 curl --header "Content-Type: application/json" --request POST --data '{"queryText":"SELECT * FROM t WHERE LoanQty > 10000 ORDER BY LoanQty DESC","limit":5}' http://localhost:8080/customQuery | python -m json.tool
+
+
+      //  https://sap1ens.com/blog/2018/01/03/message-enrichment-with-kafka-streams/
+

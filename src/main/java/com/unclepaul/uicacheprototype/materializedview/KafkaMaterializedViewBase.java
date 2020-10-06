@@ -1,20 +1,16 @@
-package com.unclepaul.uicacheprototype.materilizedview;
+package com.unclepaul.uicacheprototype.materializedview;
 
 import com.googlecode.cqengine.ConcurrentIndexedCollection;
 import com.googlecode.cqengine.IndexedCollection;
-import com.googlecode.cqengine.query.Query;
 import com.googlecode.cqengine.query.option.QueryLog;
-import com.googlecode.cqengine.query.option.QueryOptions;
 import com.googlecode.cqengine.query.parser.sql.SQLParser;
 import com.googlecode.cqengine.resultset.ResultSet;
-import com.unclepaul.uicacheprototype.entities.StockLoanDTO;
 import com.unclepaul.uicacheprototype.utils.OperationTimer;
 
 import java.io.StringWriter;
 import java.util.Collection;
 import java.util.Map;
 import java.util.function.Consumer;
-import java.util.stream.Stream;
 
 import static com.googlecode.cqengine.codegen.AttributeBytecodeGenerator.createAttributes;
 import static com.googlecode.cqengine.query.QueryFactory.*;

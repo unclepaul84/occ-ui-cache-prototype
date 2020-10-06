@@ -1,4 +1,4 @@
-package com.unclepaul.uicacheprototype.materilizedview;
+package com.unclepaul.uicacheprototype.materializedview;
 
 import com.unclepaul.uicacheprototype.utils.ManualResetEvent;
 import org.apache.kafka.clients.consumer.Consumer;

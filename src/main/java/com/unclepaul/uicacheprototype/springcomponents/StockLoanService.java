@@ -1,8 +1,7 @@
 package com.unclepaul.uicacheprototype.springcomponents;
 
-import com.unclepaul.uicacheprototype.ConsoleApplication;
 import com.unclepaul.uicacheprototype.Topics;
-import com.unclepaul.uicacheprototype.materilizedview.StockLoanDTOKafkaMaterializedView;
+import com.unclepaul.uicacheprototype.materializedview.StockLoanDTOKafkaMaterializedView;
 import com.unclepaul.uicacheprototype.utils.OperationTimer;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
