@@ -6,7 +6,7 @@ Framework prototype which demostrates the following:
  
 ### Features
 * Based on https://github.com/npgall/cqengine
-* Stateless
-* Embeddable into existing JVMs
+* Stateless - allowing for horizontal scaling
+* Embeddable into existing JVMs 
 * Hydrates itself from Kakfa
 
