@@ -9,7 +9,7 @@ Framework prototype which demostrates the following:
 * In-Memory Processing - does not touch disk
 * Stateless - allowing for horizontal scaling
 * Embeddable into existing JVMs 
-* Hydrates itself from Kakfa
+* Hydrates itself from Kakfa (or any other persistent store)
 
 ### Code Example
 ```java
