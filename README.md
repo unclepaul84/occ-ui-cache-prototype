@@ -5,7 +5,8 @@ Framework prototype which demostrates the following:
  - allows users to run arbitrary indexed SQL queries against a collection of POJOs.
  
 ### Features
-* Based on https://github.com/npgall/cqengine
+* Based on https://github.com/npgall/cqengine 
+* In-Memory Processing - does not touch disk
 * Stateless - allowing for horizontal scaling
 * Embeddable into existing JVMs 
 * Hydrates itself from Kakfa
