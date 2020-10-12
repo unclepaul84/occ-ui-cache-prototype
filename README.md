@@ -2,7 +2,7 @@
 
 Framework prototype which demostrates the following:
  - ability of users to Sort, Filter, Page very large amounts of data using any HTML DataGrid which supports server side operations.
- - allows users to run arbitrary, index accelerated SQL queries against a collection of POJOs.
+ - ability of users to run arbitrary, index accelerated SQL queries against a collection of POJOs.
  
 ### Features
 * Based on https://github.com/npgall/cqengine 
