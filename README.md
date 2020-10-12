@@ -1,7 +1,7 @@
 ![Diagram](/docs/occ-materialized-view.png)
 
 Framework prototype which demostrates the following:
- - ability of users to Sort, Filter, Page very large amounts of data using a DataGrid which supports server side operations.
+ - ability of users to Sort, Filter, Page very large amounts of data using any HTML DataGrid which supports server side operations.
  - allows users to run arbitrary, index accelerated SQL queries against a collection of POJOs.
  
 ### Features
@@ -9,7 +9,7 @@ Framework prototype which demostrates the following:
 * In-Memory Processing - does not touch disk
 * Stateless - allowing for horizontal scaling
 * Embeddable into existing JVMs 
-* Hydrates itself from Kakfa (or any other persistent store)
+* Hydrates itself from Kafka (or any other persistent store)
 
 ### Code Example
 ```java
