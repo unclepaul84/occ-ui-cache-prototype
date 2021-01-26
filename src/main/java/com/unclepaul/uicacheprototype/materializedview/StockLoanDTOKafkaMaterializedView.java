@@ -24,7 +24,7 @@ public class StockLoanDTOKafkaMaterializedView extends KafkaMaterializedViewBase
     @Override
     protected void SetupIndexes() {
        //super.SetupIndexes();
-        this._materializedView.addIndex(UniqueIndex.onAttribute(StockLoanDTO_StockLoanId));
+      this._materializedView.addIndex(UniqueIndex.onAttribute(StockLoanDTO_StockLoanId));
 
         this._materializedView.addIndex(NavigableIndex.onAttribute(StockLoanDTO_StockLoanId));
 

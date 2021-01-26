@@ -58,7 +58,7 @@ public class KafkaTopicEntityListener<T> {
 
         props.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, 1000000); // batch size
 
-        props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "false");
+        props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "true");
 
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 

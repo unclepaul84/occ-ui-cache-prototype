@@ -35,7 +35,9 @@ import static java.util.stream.Collectors.toList;
 import static org.slf4j.LoggerFactory.getLogger;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+
 @Controller
+@RequestMapping("sl")
 public class StockLoanDataProviderController {
     protected static final Logger log = getLogger(StockLoanDataProviderController.class);
 

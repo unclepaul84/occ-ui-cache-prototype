@@ -1,10 +1,22 @@
-var columnDefs = [
+<!DOCTYPE html>
+<html>
+<head>
+<style> html, body { margin: 0; padding: 0; height: 100%; } </style>
+    <script src="https://unpkg.com/@ag-grid-enterprise/all-modules@24.0.0/dist/ag-grid-enterprise.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        var columnDefs = [
 
-        { headerName: 'StockLoanId', field: 'StockLoanId', type: 'number' },
+        { headerName: 'StockColleteralId', field: 'StockColleteralId', type: 'number' },
         { headerName: 'StockSymbol', field: 'StockSymbol' ,   type: 'text' },
-        { headerName: 'Borrower', field: 'Borrower',   type: 'text'  } ,
-        { headerName: 'Lender', field: 'Lender',  type: 'text'  },
-        { headerName: 'LoanQty', field: 'LoanQty' ,type: 'number' }
+        { headerName: 'Member', field: 'Member',   type: 'text'  } ,
+        { headerName: 'QtyBorrowed', field: 'QtyBorrowed',  type: 'number'  },
+         { headerName: 'QtyPledged', field: 'QtyPledged',  type: 'number'  },
+         { headerName: 'Price', field: 'Price',  type: 'number'  },
+         { headerName: 'TotalNAV', field: 'TotalNAV',  type: 'number'  },
+         { headerName: 'Timestamp', field: 'Timestamp',  type: 'number'  }
+
+
 ];
 
 let gridOptions = {
@@ -59,7 +71,7 @@ EnterpriseDatasource.prototype.getRows = function (params) {
   console.log(jsonRequest);
 
   let httpRequest = new XMLHttpRequest();
-  httpRequest.open('POST', 'http://localhost:8080/getRows');
+  httpRequest.open('POST', 'http://localhost:8080/sc/getRows');
   httpRequest.setRequestHeader("Content-type", "application/json");
   httpRequest.send(jsonRequest);
   httpRequest.onreadystatechange = () => {
@@ -81,3 +93,24 @@ function numberCellFormatter(params) {
   let formattedNumber = Math.floor(Math.abs(params.value)).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
   return params.value < 0 ? '(' + formattedNumber + ')' : formattedNumber;
 }
+function refreshGrid()
+{
+ gridOptions.api.purgeServerSideCache();
+
+ var params = {
+    force: true,
+    suppressFlash: true,
+  };
+  gridOptions.api.refreshCells(params);
+}
+    </script>
+</head>
+<body>
+<div><button onclick="refreshGrid()">Refresh</button></div>
+
+<div style="height: 100%; box-sizing: border-box;">
+    <div id="myGrid" style="height: 100%;" class="ag-theme-balham-dark"></div>
+</div>
+
+</body>
+</html>

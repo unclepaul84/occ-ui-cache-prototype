@@ -85,6 +85,7 @@ public abstract class KafkaEntityDataGeneratorBase<T> {
             listToPublish = this._entities;
         } else {
             listToPublish = chooseEntitiesForPublication().collect(Collectors.toList());
+            log.info("Publishing " + listToPublish.stream().count() +  " Items on " + _topic );
         }
 
         for (T entity : listToPublish) {
@@ -102,6 +103,9 @@ public abstract class KafkaEntityDataGeneratorBase<T> {
 
         if (initialRun)
             _firstRunCompletedHandle.set();
+
+
+
     }
 
 

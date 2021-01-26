@@ -26,6 +26,7 @@ public class ConsoleApplication  implements ApplicationRunner {
     public static void main(String[] args) throws Exception {
         SpringApplication app = new SpringApplication(ConsoleApplication.class);
         app.setBannerMode(Banner.Mode.OFF);
+        populateKafkaTopics();
         app.run(args);
 
     }
@@ -38,16 +39,17 @@ public class ConsoleApplication  implements ApplicationRunner {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-       populateKafkaTopics();
+
         System.out.println("Press [Enter to Quit]");
         String name = reader.readLine();
     }
 
+    private static KafkaStockColleteralViewDataGenerator collateralGen;
 
     private static void populateKafkaTopics() throws Exception {
         long startTime = System.currentTimeMillis();
 
-        KafkaPriceDataGenerator priceGen = new KafkaPriceDataGenerator(Topics.Prices,1000, 10000, 1000);
+        KafkaPriceDataGenerator priceGen = new KafkaPriceDataGenerator(Topics.Prices,0, 10000, 1000);
 
         priceGen.start(true);
 
@@ -59,7 +61,7 @@ public class ConsoleApplication  implements ApplicationRunner {
 
         System.out.println("StockLoan Started!");
 
-        KafkaStockColleteralViewDataGenerator collateralGen = new KafkaStockColleteralViewDataGenerator(Topics.CollateralViews, stockLoanGen.getEntities());
+        collateralGen = new KafkaStockColleteralViewDataGenerator(Topics.CollateralViews, stockLoanGen.getEntities());
 
         collateralGen.start(true);
 

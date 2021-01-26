@@ -1,5 +1,7 @@
 package com.unclepaul.uicacheprototype.entities;
 
+import java.time.LocalDateTime;
+
 public class StockColleteralViewDTO {
 
     public long StockColleteralId;
@@ -9,7 +11,7 @@ public class StockColleteralViewDTO {
     public long QtyBorrowed; // comes from SL
     public double Price; //comes from Pricing
     public double TotalNAV; //(QtyPledged + QtyBorrowed) * Price;
-
+    public LocalDateTime Timestamp;
     // Return hashCode as normal, ignoring the version field...
     @Override
     public int hashCode() {
