@@ -60,9 +60,15 @@ let gridOptions = {
 
 };
 
+
 function EnterpriseDatasource() {}
 
 EnterpriseDatasource.prototype.getRows = function (params) {
+
+    var filterModel = gridOptions.api.getFilterModel();
+
+    event_bus.postMessage({'type': 'filter-change', 'filter':filterModel});
+
   let jsonRequest = JSON.stringify(params.request, null, 2);
   console.log(jsonRequest);
 
@@ -100,6 +106,10 @@ function refreshGrid()
   };
   gridOptions.api.refreshCells(params);
 }
+const event_bus = new BroadcastChannel('event_bus');
+
+
+
     </script>
 </head>
 <body>

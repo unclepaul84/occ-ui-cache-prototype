@@ -72,9 +72,11 @@ public class KafkaStockColleteralViewDataGenerator extends KafkaEntityDataGenera
 
     @Override
     Stream<StockColleteralViewDTO> chooseEntitiesForPublication() {
+        var price = 100.0*this._rand.nextDouble();
+        price =  Math.round(price * 100.0) / 100.0;
         for (var v: _specialListToUpdate) {
-            v.Price= 100.0*this._rand.nextDouble();
-            v.TotalNAV = v.Price * v.QtyPledged;
+            v.Price= price;
+            v.TotalNAV = Math.round(v.Price * v.QtyPledged * 100.0) / 100.0;
             v.Timestamp = LocalDateTime.now();
         }
 

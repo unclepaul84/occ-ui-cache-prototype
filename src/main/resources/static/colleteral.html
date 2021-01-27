@@ -103,6 +103,13 @@ function refreshGrid()
   };
   gridOptions.api.refreshCells(params);
 }
+const event_bus = new BroadcastChannel('event_bus');
+event_bus.onmessage = function(e) {
+  console.log('Received', e.data);
+  gridOptions.api.setFilterModel(e.data.filter);
+};
+
+
     </script>
 </head>
 <body>

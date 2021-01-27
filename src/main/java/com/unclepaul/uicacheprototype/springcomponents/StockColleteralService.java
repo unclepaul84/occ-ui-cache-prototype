@@ -17,7 +17,7 @@ public class StockColleteralService {
     private final StockColleteralViewDTOKafkaMaterializedView _slMv;
 
     public StockColleteralService() throws Exception {
-        _slMv = new StockColleteralViewDTOKafkaMaterializedView(Topics.CollateralViews, 10000L);
+        _slMv = new StockColleteralViewDTOKafkaMaterializedView(Topics.CollateralViews, 100000L);
 
         try(var t = new OperationTimer("StockColleteralViewDTOKafkaMaterializedView startup time")) {
 

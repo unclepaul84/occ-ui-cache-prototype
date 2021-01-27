@@ -16,7 +16,7 @@ public class StockLoanService {
     private final StockLoanDTOKafkaMaterializedView _slMv;
 
     public StockLoanService() throws Exception {
-        _slMv = new StockLoanDTOKafkaMaterializedView(Topics.StockLoans, 1000L);
+        _slMv = new StockLoanDTOKafkaMaterializedView(Topics.StockLoans, 100000L);
 
         try(var t = new OperationTimer("StockLoanDTOKafkaMaterializedView startup time")) {
 
