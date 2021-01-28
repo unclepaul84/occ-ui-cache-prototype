@@ -11,6 +11,11 @@ Framework prototype which demostrates the following:
 * Embeddable into existing JVMs 
 * Hydrates itself from Kafka (or any other persistent store)
 
+
+### DEMO
+[Screen Cast](https://github.com/unclepaul84/occ-ui-cache-prototype/raw/main/docs/grid.gif)
+
+
 ### Code Example
 ```java
 @Controller
